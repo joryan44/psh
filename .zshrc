@@ -32,6 +32,12 @@ alias L='ls -CL '
 alias pd='pushd '
 alias Pd='popd '
 
+alias pz1='ssh pi@192.168.1.121 '
+alias pz2='ssh pi@192.168.1.124 '
+alias pz3='ssh pi@192.168.1.242 '
+alias pb1='ssh pi@192.168.1.243 '
+alias pb3='ssh pi@192.168.1.172 '
+
 # if we're not interactive ; skip entire script/file
 if [ -n "$PS1" ] ; then
 

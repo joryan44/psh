@@ -225,7 +225,7 @@ set -o notify                                   # Don't wait for job termination
 set -o ignoreeof                                # Don't use ^D to exit
 
 export HISTCONTROL=ignoredups                   # Don't store duplicates in history.
-export EDITOR=gvim                              # other settings for externals ; may no longer need; check
+export EDITOR=vim                               # other settings for externals ; may no longer need; check
 #
 #export PS1="\u@\h \w \# \\$ "                   # workable basic prompt
 export PS1="%n %m %W %* %~ %! \$ "

@@ -16,28 +16,22 @@ compinit
 # End of lines added by compinstall
 # # copied from ~/.bash_profile
 #
-# User dependent .bash_profile
-
-alias a='alias '                                # minimal aliases
-alias h='history '
-alias j='jobs -l '
-
-# but unlike functions these handle shell expansions into file names when file names contains spaces, etc. 
-alias l='ls -CF '
-alias la='ls -CFa '
-alias ll='ls -Fal '
-alias L='ls -CL '
+# User dependent .zshrc
 
 
-alias pd='pushd '
-alias Pd='popd '
-
-alias pz1='ssh pi@192.168.1.121 '
-alias pz2='ssh pi@192.168.1.124 '
-alias pz3='ssh pi@192.168.1.242 '
-alias pb1='ssh pi@192.168.1.243 '
-alias pb3='ssh pi@192.168.1.172 '
-
+if [ -f ~/.alias ] ; then
+    . ~/.alias
+else
+    alias a='alias '                                # minimal aliases
+    alias h='history '
+    alias j='jobs -l '
+    alias l='ls -CF '
+    alias la='ls -CFa '
+    alias ll='ls -Fal '
+    alias L='ls -CL '
+    alias pd='pushd '
+    alias Pd='popd '
+fi
 # if we're not interactive ; skip entire script/file
 if [ -n "$PS1" ] ; then
 
@@ -132,7 +126,7 @@ cleanpath()
 
 function esp()
 {
-  ${EDITOR:-vi} ~/.bash_profile && pause && renew
+  ${EDITOR:-vi} ~/.zshrc && pause && renew
 }
 
 function esv()
@@ -144,7 +138,7 @@ function renew()
 {
   # get and restore current directory
   my_cur_dir=$(pwd) 
-  . ~/.bash_profile
+  . ~/.zshrc
   cd "$my_cur_dir"
 }
 

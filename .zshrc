@@ -2,9 +2,17 @@
 # vim: set expandtab:
 # vim: tabstop=4
 # Lines configured by zsh-newuser-install
+#
 HISTFILE=~/.histfile
 HISTSIZE=65536
 SAVEHIST=65536
+APPEND_HISTORY=1
+HIST_IGNORE_DUPS=1
+HIST_IGNORE_ALL_DUPS=1
+HIST_FIND_NO_DUPS=1
+HIST_BEEP=1
+
+
 setopt autocd beep extendedglob nomatch notify
 bindkey -e
 # End of lines configured by zsh-newuser-install
@@ -202,8 +210,12 @@ export $ENV" >> $TMP ;
 # assume this here
 TR=/usr/bin/tr
 
-prependpath /usr/local/sbin                     # HomeBrew
+prependpath /usr/local/sbin                     # ?? HomeBrew
 prependpath /usr/local/bin
+
+prependpath /opt/homebrew/sbin                     # Apple Silicon HomeBrew
+prependpath /opt/homebrew/bin
+
 appendpath /bin
 appendpath /usr/bin
 appendpath /usr/sbin
@@ -224,7 +236,7 @@ cleanpath
 set -o notify                                   # Don't wait for job termination notification
 set -o ignoreeof                                # Don't use ^D to exit
 
-export HISTCONTROL=ignoredups                   # Don't store duplicates in history.
+#export HISTCONTROL=ignoredups                   # Don't store duplicates in history.
 export EDITOR=vim                               # other settings for externals ; may no longer need; check
 #
 #export PS1="\u@\h \w \# \\$ "                   # workable basic prompt

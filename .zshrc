@@ -236,12 +236,26 @@ cleanpath
 set -o notify                                   # Don't wait for job termination notification
 set -o ignoreeof                                # Don't use ^D to exit
 
-#export HISTCONTROL=ignoredups                   # Don't store duplicates in history.
+#export HISTCONTROL=ignoredups                  # Don't store duplicates in history.
 export EDITOR=vim                               # other settings for externals ; may no longer need; check
 #
-#export PS1="\u@\h \w \# \\$ "                   # workable basic prompt
-export PS1="%n %m %W %* %~ %! \$ "
+#
+function psb() 
+{ 
+    export PS1="\u@\h \w \# \\$ "               # workable basic prompt
+}
 
+function psz() 
+{ 
+    export PS1="%n@%m %W %* %~ %! \$ "
+}
+
+function pzs() 
+{ 
+    export PS1="%n@%m %~ %! \$ "
+}
+
+pzs
 
 # set group friendly user permissions mask
 umask 002

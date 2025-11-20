@@ -48,10 +48,7 @@ function prependpath()
 {
     if test $# -lt 1; then
         echo "usage: prependpath directory"
-        echo "Prepend directory to PATH; if it exists and it is not already in PATH"
-        # this has the side effect of NOT moving target to front if it is already included
-        # this may not be quite what is expectd or desired
-        # so in these cases, use delfrompath, followed by prependpath
+        echo "Prepend directory to PATH; if it exists, (re) moving it if already in PATH"
         return
     else
         newdir="$1"
@@ -63,11 +60,13 @@ function prependpath()
         fi
         for pathdir in $(echo $PATH | $TR ":" " ")
         do
-            if [ "$pathdir" = "$newdir" ] ; then
-                ###echo "prependpath: $newdir already on path - ignored."  ###echo
-                return
+            if [[ "$pathdir" == "$newdir" ]] ; then
+                ###echo "prependpath: $newdir already on path - moving to front."  ###echo
+                delfrompath "$newdir"
+                continue # not break because dups ...
             fi
         done
+        # 
         PATH=$newdir:$PATH
     fi
 }
@@ -210,8 +209,8 @@ export $ENV" >> $TMP ;
 # assume this here
 TR=/usr/bin/tr
 
-prependpath /usr/local/sbin                     # ?? HomeBrew
-prependpath /usr/local/bin
+prependpath /usr/local/sbin                    # HomeBrew
+prependpath /usr/local/bin                     # HomeBrew
 
 prependpath /opt/homebrew/sbin                     # Apple Silicon HomeBrew
 prependpath /opt/homebrew/bin
@@ -220,8 +219,6 @@ appendpath /bin
 appendpath /usr/bin
 appendpath /usr/sbin
 appendpath /sbin
-#
-delfrompath ~/Desktop/cli ; prependpath ~/Desktop/cli # ensure in first place
 
 delfrompath /System/Cryptexes/App/usr/bin
 delfrompath "/Applications/Little Snitch.app/Contents/Components"
@@ -229,6 +226,24 @@ delfrompath /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/loca
 delfrompath /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin
 delfrompath /var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin
 #
+if [[ -d /usr/local/Cellar ]] ; then  # MacOS Intel (my iMac 2017)
+    prependpath /usr/local/Cellar/coreutils/9.9/libexec/gnubin
+    prependpath /usr/local/Cellar/grep/3.12/libexec/gnubin
+    prependpath /usr/local/Cellar/gnu-sed/4.9/libexec/gnubin
+    prependpath /usr/local/Cellar/gawk/5.3.1/libexec/gnubin
+    prependpath /usr/local/Cellar/findutils/4.10.0/libexec/gnubin
+fi
+#
+if [[ -d /opt/homebrew/opt ]] ; then   # MacOS Apple Silicon
+    prependpath  /opt/homebrew/opt/grep/libexec/gnubin
+    prependpath  /opt/homebrew/opt/gnu-sed/libexec/gnubin
+    prependpath  /opt/homebrew/opt/findutils/libexec/gnubin
+    prependpath  /opt/homebrew/opt/coreutils/libexec/gnubin
+    prependpath  /opt/homebrew/opt/gawk/libexec/gnubin
+fi
+
+#
+prependpath ~/Desktop/cli # ensure in first place
 
 cleanpath
 

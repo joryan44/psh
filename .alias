@@ -11,6 +11,12 @@ alias ll='ls -Fal '
 alias Pd='popd '
 alias pd='pushd '
 
+alias cdb='cd ~/Dropbox '
+alias cdt='cd ~/Desktop '
+alias cdd='cd ~/Documents '
+alias cdsh='cd ~/psh'
+alias cdt='cd /tmp '
+
 alias mac='ssh    dad@192.168.1.137'
 alias mba='ssh Joseph@192.168.1.23 '
 alias min='ssh MyCloud@192.168.1.34 '

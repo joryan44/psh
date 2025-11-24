@@ -12,7 +12,7 @@ alias Pd='popd '
 alias pd='pushd '
 
 alias cdb='cd ~/Dropbox '
-alias cdt='cd ~/Desktop '
+alias cddt='cd ~/Desktop '
 alias cdd='cd ~/Documents '
 alias cdsh='cd ~/psh'
 alias cdt='cd /tmp '
